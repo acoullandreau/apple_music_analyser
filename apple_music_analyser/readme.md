@@ -72,47 +72,81 @@ help(apple_music_analyser.Utility)
 ```
 
 This will print both the docstring of the Utility class, as well as all the methods defined in this class and their docstring.
-For more details on the structure of the code, please take a look at the docs folder in the [GitHub repository](https://github.com/acoullandreau/apple_dashboard)!
+For more details on the structure of the code, please take a look at the docs folder in the [GitHub repository](https://github.com/acoullandreau/apple_music_analyser/tree/master/docs)!
 
 
 Test functions
 -----------------
 
+There is a total of 81 tests available, dispatched in multiple test modules (one per package module). As some tests require to have files to parse, I created an archive test_df.zip that contains each required file with an extract of my own real data. This archive has been constructed as to encounter many "corner" cases I hit during the implementation process. Hopefully, it covers the majority of the corner cases one can encounter when using this package.
+
+Here is the coverage report:
+
+Name                                                        Stmts   Miss  Cover
+-------------------------------------------------------------------------------
+apple_music_analyser/DataVisualization.py                     130    102    22%
+apple_music_analyser/Parser.py                                101      2    98%
+apple_music_analyser/Process.py                               235      5    98%
+apple_music_analyser/Query.py                                  81      1    99%
+apple_music_analyser/Track.py                                  56      0   100%
+apple_music_analyser/Utility.py                                93     11    88%
+apple_music_analyser/VisualizationDataframe.py                 60      0   100%
+apple_music_analyser/__init__.py                                7      0   100%
+apple_music_analyser/tests/__init__.py                          0      0   100%
+apple_music_analyser/tests/test_Parser.py                     140      1    99%
+apple_music_analyser/tests/test_Process.py                    313      1    99%
+apple_music_analyser/tests/test_Query.py                      100      1    99%
+apple_music_analyser/tests/test_Track.py                       61      1    98%
+apple_music_analyser/tests/test_Utils.py                       58      1    98%
+apple_music_analyser/tests/test_VisualizationDataframe.py      93      1    99%
+-------------------------------------------------------------------------------
+TOTAL                                                        1528    127    92%
 
 
+Let's note that the module DataVisualization is barely tested, as it is actually an interface for the user to simply build Plotly visualizations, but this is not the core of the package! Besides, adding tests for theses would actually be pretty equivalent to testing Plotly (and it is obvisouly irrelevant).
 
-
-
-
-There is a total of 37 tests available, that should cover most of the classes and methods available. 
-
-
-| Name 		   | Stmts | Miss | Cover | Missing         |
-| ------------ | ----- | ---- | ----- | --------------- |
-| classfile.py | 214   |  10  |  95%  | 20-28, 155-156  |
-| utility.py   | 33    |   0  |  100% |                 |
-
-Note: tests can be executed using the following command from the geo_rendering main directory (where the setup.py file is stored!)
+If you want to execute the tests, you can simply run the following command from the package main directory (where the setup.py file is stored!):
 
 ```
-python setup.py test
+python -m unittest discover -b
+```
+
+And if you want to generate the coverage report, ensure that you have the coverage package (```pip install coverage```) installed, and run the following two commands: 
+
+```
+coverage run --source=apple_music_analyser -m unittest discover -b
+```
+
+```
+coverage report -m
+```
+
+-m is going to display the missing lines
+-b is going to prevent print statements to be displayed on the terminal when running the tests.
+
+And if you want a much more complete report, run the following command and open the index.html file in the coverage_html folder created:
+
+```
+coverage html -d coverage_html
 ```
 
 
 Further work and improvements
 -----------------------------
 
-Some improvements that could be performed on the package:
+I hope to be able to gather feedback from users, because having other people's insight on how to improve this package is most probably going to bring up new ideas! So far, I can identify three areas of improvement:
 
-- convert id should not go beyond 0
-- handle errors if points in calculate_boundaries are not lists of tuples (it doesn't make sense otherwise)
-- handle errors if points in calculate_centroid are not lists of tuples (it doesn't make sense otherwise)
-- handle errors if points to render on map is not a list of coordinates (type POLYGON)
-- format of input for interpolate_next_position
-- in general, handle better errors related to the format of an input
+- allow the user to personalize more what actions are performed when parsing the input files (which columns to drop, which ones to add...)
+- improve efficiency in the parsing and processing of the data (for a few tens of thousands lines, it around 30 seconds.)
+- enhance error handling, corner cases
 
 
 Sources, acknowlegments and related content
 -------------------------------------------
 
-This work is inspired from a data visualisation project about the NYC taxi rides ([link to the repository of the project](https://github.com/acoullandreau/nyc_taxi_trips))
+This project actually started as a much smaller journey, a simple exploration of my personal data from the Apple Music service. It occured to me, after a few hours wrangling, cleaning, looking from different angles at the data, that it may be useful for other people to be able to dive into their own data without going through the trouble of parsing and processing it all. And just like that, two projects were born: this python package, and a webpage for anyone to parse/process locally and visualize a set of nice graphs and representation. 
+
+If you want to check out the data analysis process I went through before building this package --> [Exploratory analysis](https://github.com/acoullandreau/apple_dashboard_exploration)
+
+If you want to follow up the progress on the webpage --> [Apple Music Dashboard](https://github.com/acoullandreau/apple_music_dashboard)
+

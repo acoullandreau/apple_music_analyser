@@ -397,7 +397,7 @@ Now that we have the input dataframes, we can instantiate VisualizationDataframe
 visualization_structure = VisualizationDataframe(input_df)
 ```
 
-This step can take a few seconds! For you to have an idea, with input dataframes of a few thousands lines, it took around 30 seconds. 
+This step can take a few seconds! For you to have an idea, with input dataframes of a few tens of thousands lines, it took around 30 seconds. 
 
 Alright, that's pretty much it, now you are ready to use the data structures! Let's see what you may want to look at....
 
