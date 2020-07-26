@@ -1,4 +1,15 @@
-# apple\_music\_analyser package
+# Apple Music Analyser - Python package
+
+
+Welcome! In this repository, you will find the source code of the apple\_music\_analyser python package. 
+
+
+Context of this project
+------------------------
+
+This project actually started as a much smaller journey. I started using Apple Music in 2016, and when I found out I could request an archive with all my usage data, I decided to dive into the data!
+
+It occured to me, after a few hours wrangling, cleaning, looking from different angles at the data, that it may be useful for other people to be able to dive into their own data without going through the trouble of parsing and processing it all. And just like that, this python package was born!
 
 
 Purpose of this package
@@ -135,7 +146,7 @@ Further work and improvements
 
 I hope to be able to gather feedback from users, because having other people's insight on how to improve this package is most probably going to bring up new ideas! So far, I can identify three areas of improvement:
 
-- use a config file to pass the archive path and file structure, and allow the user to personalize more what actions are performed when parsing and processing the input files (which columns to drop, which ones to add...)
+- use a config file to pass the archive path and file structure, and allow the user to personalize more what actions are performed when parsing the input files (which columns to drop, which ones to add...)
 - improve efficiency in the parsing and processing of the data (for a few tens of thousands lines, it around 30 seconds.)
 - enhance error handling, corner cases
 

@@ -137,6 +137,7 @@ Parsing consists in cleaning and transforming each input dataframe. It is done t
 	        'UTC Offset In Seconds','Play Duration Milliseconds', 'Media Duration In Milliseconds',
 	        'Feature Name']
 	- this file is used as a base to build the visualization dataframe 
+	- a note on the time columns: the file provided by Apple contains a column 'UTC Offset In Seconds', that we use by default to convert the timestamp of each activity to local time. The function to parse the dataframe (Parser.parse_play_activity_df()) accepts an argument 'convert_to_local_time', set by default to True. 
 
 - identifier\_infos\_df 
 
@@ -254,11 +255,57 @@ This module contains a lot of helper functions, used by all the other modules.
 It is in charge specifically of:
 
 - parsing the input archive
-- saving and loading a VisualizationDataframe for later used (relevant if you have a lot of data to process, and want to process it once and then use the processed output without needing to process the inputs again)
+- saving and loading pickle files
 - Other helper functions include
 	- parsing date time columns
 	- computing a similarity score between strings
 	- ...
+
+
+#### Parsing the input archive
+The Utility module has a get_input_df(path_to_archive) method, that takes care of extracting the files we need from the archive passed as an argument.
+
+The archive is a zip file that must contain the following files (with these file names and extensions):
+
+	|_ Identifier Information.json.zip
+	|_ Apple Music Library Tracks.json.zip
+	|_ Apple Music Library Activity.json.zip
+	|_ Apple Music Likes and Dislikes.csv
+	|_ Apple Music Activity/Apple Music Play Activity.csv
+
+By default, the archive sent by Apple will have the following structure:
+	
+	Apple_Media_Services (folder)
+		|_ Apple Music Activity (folder)
+			|_ Identifier Information.json.zip
+			|_ Apple Music Library Tracks.json.zip
+			|_ Apple Music Library Activity.json.zip
+			|_ Apple Music Likes and Dislikes.csv
+			|_ Apple Music Activity/Apple Music Play Activity.csv
+
+But if the user wants to provide the files within an archive that has a different structure, then another argument must be passed to the get_input_df method, a dictionary with the path to each file WITHIN the archive, like so:
+
+    target_files = {
+        'identifier_infos_path' : 'Path_to_file_within_archive/Identifier Information.json.zip',
+        'library_tracks_path' : 'Path_to_file_within_archive/Apple Music Library Tracks.json.zip',
+        'library_activity_path': 'Path_to_file_within_archive/Apple Music Library Activity.json.zip',
+        'likes_dislikes_path' : 'Path_to_file_within_archive/Apple Music Likes and Dislikes.csv',
+        'play_activity_path': 'Path_to_file_within_archive/Apple Music Play Activity.csv'
+    }
+
+See the [example] (#simple_example) below how to interact with this class.
+
+
+**Important note**
+If the archive has a proper structure and is accepted, each file will be read as a pandas dataframe. For the case of the csv files, we make use of the two arguments 'error_bad_lines=False' and 'warn_bad_lines=False', which means that badly formatted lines are ignored, and no warning is displayed. 
+
+
+#### Saving and loading pickle files
+As it will take a few seconds to parse and process all the input files, it may be useful to perform the parsing and processing once, and saving the instance of VisualizationDataframe for later use. 
+
+This can be done using the save_to_pickle method of the Utility class. Later on, we can load the pickle file saved using the load_from_pickle method.
+
+Note that it is possible to save a multitude of objects, such as the VisualizationDataframe instance, or only the visualization dataframe, ...
 
 See the [example] (#simple_example) below how to interact with this class.
 
