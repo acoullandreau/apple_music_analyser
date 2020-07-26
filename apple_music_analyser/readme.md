@@ -1,5 +1,4 @@
-apple_music_analyser package - basics
-=======================================
+# apple\_music\_analyser package
 
 
 Purpose of this package
@@ -54,7 +53,8 @@ A brief introduction on how to use this package and a demo are available on [Med
 Code documentation
 ------------------
 
-This package is composed of a total of 7 modules
+This package is composed of a total of 7 modules:
+
 - VisualizationDataframe
 - Parser
 - Process
@@ -82,26 +82,25 @@ There is a total of 81 tests available, dispatched in multiple test modules (one
 
 Here is the coverage report:
 
-Name                                                        Stmts   Miss  Cover
--------------------------------------------------------------------------------
-apple_music_analyser/DataVisualization.py                     130    102    22%
-apple_music_analyser/Parser.py                                101      2    98%
-apple_music_analyser/Process.py                               235      5    98%
-apple_music_analyser/Query.py                                  81      1    99%
-apple_music_analyser/Track.py                                  56      0   100%
-apple_music_analyser/Utility.py                                93     11    88%
-apple_music_analyser/VisualizationDataframe.py                 60      0   100%
-apple_music_analyser/__init__.py                                7      0   100%
-apple_music_analyser/tests/__init__.py                          0      0   100%
-apple_music_analyser/tests/test_Parser.py                     140      1    99%
-apple_music_analyser/tests/test_Process.py                    313      1    99%
-apple_music_analyser/tests/test_Query.py                      100      1    99%
-apple_music_analyser/tests/test_Track.py                       61      1    98%
-apple_music_analyser/tests/test_Utils.py                       58      1    98%
-apple_music_analyser/tests/test_VisualizationDataframe.py      93      1    99%
--------------------------------------------------------------------------------
-TOTAL                                                        1528    127    92%
-
+| Name | Stmts | Miss | Cover |
+| :--- |  ---: | ---: |  ---: |
+| apple\_music\_analyser/DataVisualization.py | 130 | 102 | 22% |
+| apple\_music\_analyser/Parser.py | 101 | 2 | 98% |
+| apple\_music\_analyser/Process.py | 235 | 5 | 98% |
+| apple\_music\_analyser/Query.py | 81 | 1 | 99% |
+| apple\_music\_analyser/Track.py | 56 | 0 | 100% |
+| apple\_music\_analyser/Utility.py | 93 | 11 | 88% |
+| apple\_music\_analyser/VisualizationDataframe.py | 60 | 0 | 100% |
+| apple\_music\_analyser/\_\_init\_\_.py | 7 | 0 | 100% |
+| apple\_music\_analyser/tests/\_\_init\_\_.py  | 0 | 0 | 100% |
+| apple\_music\_analyser/tests/test\_Parser.py | 140 | 1 | 99% |
+| apple\_music\_analyser/tests/test\_Process.py | 313 | 1 | 99% |
+| apple\_music\_analyser/tests/test\_Query.py | 100 | 1 | 99% |
+| apple\_music\_analyser/tests/test\_Track.py | 61 | 1 | 98% |
+| apple\_music\_analyser/tests/test\_Utils.py | 58 | 1 | 98% |
+| apple\_music\_analyser/tests/test\_VisualizationDataframe.py | 93 | 1 | 99% |
+| **TOTAL** |  **1528** | **127** |  **92%** |
+    
 
 Let's note that the module DataVisualization is barely tested, as it is actually an interface for the user to simply build Plotly visualizations, but this is not the core of the package! Besides, adding tests for theses would actually be pretty equivalent to testing Plotly (and it is obvisouly irrelevant).
 
@@ -136,9 +135,11 @@ Further work and improvements
 
 I hope to be able to gather feedback from users, because having other people's insight on how to improve this package is most probably going to bring up new ideas! So far, I can identify three areas of improvement:
 
-- allow the user to personalize more what actions are performed when parsing the input files (which columns to drop, which ones to add...)
+- use a config file to pass the archive path and file structure, and allow the user to personalize more what actions are performed when parsing the input files (which columns to drop, which ones to add...)
 - improve efficiency in the parsing and processing of the data (for a few tens of thousands lines, it around 30 seconds.)
 - enhance error handling, corner cases
+
+There may be a way also, one day, to build a pipeline to collect data using the Apple Music API to be able to perform the analysis at any moment, not upon requesting the archive to Apple. At the moment, this would imply being able to store the data somewhere...and actually somewhat recreate the database Apple already feeds... 
 
 
 Sources, acknowlegments and related content
