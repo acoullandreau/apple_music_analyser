@@ -1,13 +1,10 @@
 # Apple Music Analyser - Python package
 
 
-Welcome! In this repository, you will find the source code of the apple\_music\_analyser python package. 
-
-
 Context of this project
 ------------------------
 
-This project actually started as a much smaller journey. I started using Apple Music in 2016, and when I found out I could request an archive with all my usage data, I decided to dive into the data!
+This apple\_music\_analyser python package project actually started as a much smaller journey. I started using Apple Music in 2016, and when I found out I could request an archive with all my usage data, I decided to dive into the data!
 
 It occured to me, after a few hours wrangling, cleaning, looking from different angles at the data, that it may be useful for other people to be able to dive into their own data without going through the trouble of parsing and processing it all. And just like that, this python package was born!
 
@@ -31,7 +28,7 @@ Requirements
 
 The code is written in Python 3.7.
 
-There are several dependencies for this package. The versions provided here are those used for testing.
+There are several dependencies for this package. The versions provided here are those used for testing. 
 
 - difflib (python standard library)
 - numpy 1.18.4
@@ -83,7 +80,7 @@ help(apple_music_analyser.Utility)
 ```
 
 This will print both the docstring of the Utility class, as well as all the methods defined in this class and their docstring.
-For more details on the structure of the code, please take a look at the docs folder in the [GitHub repository](https://github.com/acoullandreau/apple_music_analyser/tree/master/docs)!
+For more details on the structure of the code, please take a look at the [documentation](https://github.com/acoullandreau/apple_music_analyser/tree/master/docs)!
 
 
 Test functions
