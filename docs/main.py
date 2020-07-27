@@ -8,16 +8,7 @@ import time
 start0 = time.time()
 
 # get the input files
-#input_df = Utility.get_df_from_archive('data/Apple_Media_Services_L.zip')
-
-# create an instance of the visualization dataframe class
-#df_viz = VisualizationDataframe(input_df)
-#Utility.save_to_pickle(df_viz, 'df_viz.pkl')
-
-#df_viz = Utility.load_from_pickle('df_viz.pkl')
-
-
-path_to_archive = '../apple_music_analyser/apple_music_analyser/tests/test_df.zip'
+path_to_archive = '../apple_music_analyser/tests/test_df.zip'
 target_files = {
 	'identifier_infos_path' : 'test_df/Apple Music Activity/Identifier Information.json.zip',
 	'library_tracks_path' : 'test_df/Apple Music Activity/Apple Music Library Tracks.json.zip',
@@ -26,9 +17,15 @@ target_files = {
 	'play_activity_path': 'test_df/Apple Music Activity/Apple Music Play Activity.csv'
 	}
 input_df = Utility.get_df_from_archive(path_to_archive, target_files)
+
+# create an instance of the visualization dataframe class
 df_viz = VisualizationDataframe(input_df)
 
-print(df_viz.df_visualization.shape)
+# save the instance
+Utility.save_to_pickle(df_viz, 'df_viz.pkl')
+
+# load a saved instance
+#df_viz = Utility.load_from_pickle('df_viz.pkl')
 
 
 ###########################################################################################################################
