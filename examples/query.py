@@ -49,5 +49,5 @@ print(query_string)
 
 # you may want to add all the years available in the df in your query parameters, and in this case you can do:
 # query_params = {
-#     'year':sorted(df['Play_Year'].dropna().unique()),
+#     'year':sorted(df_viz['Play_Year'].dropna().unique()),
 # }

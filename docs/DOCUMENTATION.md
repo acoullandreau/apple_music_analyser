@@ -17,6 +17,8 @@ Also, don't hesitate to check out the two Medium posts:
 * how to use the package, step by step guide
 * applied example of the package with my personal data
 
+And finally, for more examples, take a look at the [examples folder](https://github.com/acoullandreau/apple_music_analyser/tree/master/examples)!
+
 <a name="structure">
 Code structure
 ---------------
@@ -390,7 +392,7 @@ Simple example code
 
 In this example we are going to go through the few steps it takes to get a visualization dataframe, apply a query filter on it and get a ranking list for multiple years. 
 
-We are going to use the archive stored in the tests folder, actually used to execute some of the tests of the package. Feel free to read the **Medium post dedicated to a step-by-step tutorial** of this package with many examples, as well as the analysis I performed in my own data!
+We are going to use the archive stored in the tests folder, actually used to execute some of the tests of the package. Feel free to read the **Medium post dedicated to a step-by-step tutorial** of this package with many examples, as well as the [**examples folder**](https://github.com/acoullandreau/apple_music_analyser/tree/master/examples)!
 
 
 #### Step 0 - imports
