@@ -44,7 +44,7 @@ class ProcessTracks():
             process_play_df(play_activity_df)
             process_likes_dislikes_df(likes_dislikes_df)           
 
-        The methods that parse each df can be called seperately, but only process_library_tracks_df and process_play_df will create
+        The methods that processes each df can be called seperately, but only process_library_tracks_df and process_play_df will create
         new instances of Track (the other can only update existing instances). Besides, process_identifier_df requires that the
         existing instances of Tracks have their attribute apple_music_id populated, so it should be executed after processing
         the library_tracks_df.
