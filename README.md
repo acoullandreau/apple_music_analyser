@@ -55,7 +55,7 @@ The setup.py file lists all dependencies.
 Tutorial
 ---------
 
-A brief introduction on how to use this package and a demo are available on [Medium](https://medium.com/@mozart38).
+A brief introduction on how to use this package and a demo are available on [Medium](https://medium.com/@mozart38/apple-music-activity-analyser-part-2-3a62c6284eb0).
 
 
 Code documentation

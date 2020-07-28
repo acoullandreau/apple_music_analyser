@@ -12,10 +12,7 @@ In this document, we will go through the ideas and logic of the code of the pack
 
 To understand even better the *why*, please take a look at the exploratory work I did prior to building this project, available as a Jupyter notebook !
 
-Also, don't hesitate to check out the two Medium posts:
-
-* how to use the package, step by step guide
-* applied example of the package with my personal data
+Also, don't hesitate to check out the [Medium post](https://medium.com/@mozart38/apple-music-activity-analyser-part-2-3a62c6284eb0) related to how to use the package, as step by step guide.
 
 And finally, for more examples, take a look at the [examples folder](https://github.com/acoullandreau/apple_music_analyser/tree/master/examples)!
 
@@ -185,7 +182,7 @@ This processing step relies on the use of the Process module. This module is div
 Basically what happens with the ProcessTracks class is that we loop through each dataframe, and gradually instantiate Track instances and update them with the information available for this track across the multiple dataframes. In order to know whether a row in a dataframe describes a track we already instantiated or a new one, there are a few mechanisms (i.e. how do we know if a row describes a song we already saw in another df or not.):
 
 	1. using a combined string of the form 'Title && Artist'
-	2. computing a score of similarity between two combines strings if they don't match exactly
+	2. computing a score of similarity between two combined strings if they don't match exactly
 	3. for the specific case of identifier\_infos\_df, using the ids apple uses for each track
 
 Then with the TrackSummaryObject class, we use the play\_activity\_df as a base, to which are merged/appended relevant information from the other dataframes, including the rating, other genres that could be associated to it... 
@@ -525,7 +522,7 @@ for year in query_params['year']:
    year_query_params['year'] = [year]
    
    # we get a filtered df
-   filtered_df = QueryFactory().create_query(df_viz, query_params)
+   filtered_df = QueryFactory().create_query(df_viz, year_query_params)
    
    # we replace the dataframe initially passed by the year filtered df
    heat_map.df = filtered_df.filtered_df
