@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="apple_music_analyser",
-    version="0.1.0",
+    version="0.1.1",
     description="Data wrangling and processing for visualization of the usage of the Apple Music service",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
