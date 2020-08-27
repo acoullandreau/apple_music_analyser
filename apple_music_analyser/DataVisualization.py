@@ -497,8 +497,9 @@ class PieChartVisualization():
         '''
             This function is in charge of building a pie chart.
         '''
-        labels = self.serie_to_plot.dropna().unique()
+        labels = self.serie_to_plot.value_counts().index.tolist()
         values = self.serie_to_plot.value_counts()
+        
         pie = go.Pie(labels=labels, values=values, textinfo='label+percent')
         self.data = pie
 
