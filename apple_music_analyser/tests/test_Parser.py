@@ -5,7 +5,6 @@ from apple_music_analyser.Utility import Utility
 from apple_music_analyser.Parser import Parser
 
 
-
 class TestParser(unittest.TestCase):
 
     @classmethod
@@ -124,22 +123,23 @@ class TestParser(unittest.TestCase):
 
     def test_remove_play_duration_outliers(self):
         df = pd.DataFrame.from_dict({
-            'Play duration in minutes':[1, 4, 6, 999],
-            'Media Duration In Milliseconds':[123, 345, 678, 120000],
+            'Play duration in minutes':[1, 4, 6, 92, 999],
+            'Media Duration In Milliseconds':[123, 345, 678, 720000, 120000],
             })
 
         shape_input_df = df.shape
         duration_minutes = df['Play duration in minutes']
         media_duration = df['Media Duration In Milliseconds']
-        percentile = df['Play duration in minutes'].quantile(0.99)
-        Parser.remove_play_duration_outliers(df, duration_minutes, media_duration, percentile)
+        max_duration = 90
+        Parser.remove_play_duration_outliers(df, duration_minutes, media_duration, max_duration)
         self.assertTrue(isinstance(df, pd.DataFrame))
         self.assertEqual(df.shape[0], shape_input_df[0])
         self.assertEqual(df.shape[1], shape_input_df[1])
         self.assertEqual(int(df.iloc[0, 0]), 1)
         self.assertEqual(df.iloc[1, 0], 4)
         self.assertEqual(df.iloc[2, 0], 6)
-        self.assertEqual(df.iloc[3, 0], 2)
+        self.assertEqual(df.iloc[3, 0], 12)
+        self.assertEqual(df.iloc[4, 0], 2)
 
     def test_parse_play_activity_df(self):
         play_activity_df = self.input_df['play_activity_df']

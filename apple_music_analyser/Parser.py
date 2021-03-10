@@ -187,10 +187,9 @@ class Parser():
         played_completely = parsed_df['Played completely']
         Parser.compute_play_duration(parsed_df, activity_start, activity_end, played_completely, play_duration, media_duration)
 
-        # we remove outliers from this play duration column, saying that if a value if above the 99th percentile,
+        # we remove outliers from this play duration column, saying that if a value if above 1h30,
         # we drop it, and replace it by the duration of the media
-        percentile = parsed_df['Play duration in minutes'].quantile(0.99)
-        Parser.remove_play_duration_outliers(parsed_df, parsed_df['Play duration in minutes'], media_duration, percentile)
+        Parser.remove_play_duration_outliers(parsed_df, parsed_df['Play duration in minutes'], media_duration, 90)
 
         #we can then remove the columns we do not need anymore!
         if drop_columns:
@@ -295,11 +294,11 @@ class Parser():
         play_activity_df.loc[(played_completely == False)&(type(play_duration)!=float)&(play_duration>0), 'Play duration in minutes'] = play_duration/60000
 
     @staticmethod
-    def remove_play_duration_outliers(play_activity_df, play_duration, media_duration, percentile):
+    def remove_play_duration_outliers(play_activity_df, play_duration, media_duration, max_duration):
         '''
-            This method replaces any play duration outlier (beyong the percentile value) by the media duration.
+            This method replaces any play duration outlier (beyond the max_duration value) by the media duration.
         '''
-        play_activity_df.loc[play_duration > percentile, 'Play duration in minutes'] = media_duration/60000
+        play_activity_df.loc[play_duration > max_duration, 'Play duration in minutes'] = media_duration/60000
 
 
 
