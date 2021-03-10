@@ -1,5 +1,6 @@
 from difflib import SequenceMatcher
 import pandas as pd
+import numpy as np
 import pickle
 from zipfile import ZipFile
 
@@ -72,13 +73,13 @@ class Utility():
 
                 library_tracks_df = Utility.get_df_from_file(archive_files.open(target_files['library_tracks_path']))
                 dataframes['library_tracks_df']=library_tracks_df
-
+                
                 library_activity_df = Utility.get_df_from_file(archive_files.open(target_files['library_activity_path']))
                 dataframes['library_activity_df']=library_activity_df
-
+                
                 likes_dislikes_df = Utility.get_df_from_file(archive_files.open(target_files['likes_dislikes_path']))
                 dataframes['likes_dislikes_df']=likes_dislikes_df
-
+                
                 play_activity_df = Utility.get_df_from_file(archive_files.open(target_files['play_activity_path']))
                 dataframes['play_activity_df']=play_activity_df
 
@@ -104,7 +105,7 @@ class Utility():
         elif file_path.name.endswith('.json'):
             df = pd.read_json(file_path)
         elif file_path.name.endswith('.csv'):
-            df = pd.read_csv(file_path, error_bad_lines=False, warn_bad_lines=False)
+            df = pd.read_csv(file_path, encoding='utf-8-sig', error_bad_lines=False, warn_bad_lines=False)
         else:
             print('Please provide a file with extension .csv, .json or .json.zip')
         
@@ -182,8 +183,16 @@ class Utility():
             This method returns a datetime serie converted to a different timezone.
             It accepts as arguments datetime_serie and timezone_serie.
             Both must be of the same size. 
-            timezone_serie must contain an offset from GMT in seconds.
+            timezone_serie must contain an offset from GMT in seconds, so we validate that the value is in seconds.
+            If it is provided in ms or in hours, we convert it to seconds. 
         '''
+        #handles the case where the value provided is in hours
+        timezone_serie = np.where(abs(timezone_serie) <= 12, timezone_serie*3600, timezone_serie)
+        #handles the case where the value provided is in minutes
+        timezone_serie = np.where(abs(timezone_serie/60) <= 12, timezone_serie*60, timezone_serie)
+        #handles the case where the value provided is in milliseconds
+        timezone_serie = np.where(abs(timezone_serie/3600) <= 12, timezone_serie, timezone_serie/1000)
+
         timedelta = pd.to_timedelta(timezone_serie, unit='s')
         return datetime_serie + timedelta
 

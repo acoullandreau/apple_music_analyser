@@ -1,8 +1,8 @@
 import pandas as pd
 import unittest
 
-from apple_music_analyser.Utility import Utility
-
+#from apple_music_analyser.Utility import Utility
+from Utility import Utility
 
 class TestUtils(unittest.TestCase):
 
@@ -23,11 +23,11 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(result, 'Title && Artist')
 
     def test_convert_to_local_time(self):
-        serie = pd.date_range('2020-01-01', periods=3, freq='H')
-        timezone_serie = pd.Series([3600, -7200, 0])
+        serie = pd.date_range('2020-01-01', periods=9, freq='H')
+        timezone_serie = pd.Series([3600, -7200, 0, 3600000, -7200000, 60, -120, 1, -2])
         result = Utility.convert_to_local_time(serie, timezone_serie).tolist()
         result = [str(x) for x in result]
-        self.assertEqual(result, ['2020-01-01 01:00:00', '2019-12-31 23:00:00', '2020-01-01 02:00:00'])
+        self.assertEqual(result, ['2020-01-01 01:00:00', '2019-12-31 23:00:00', '2020-01-01 02:00:00', '2020-01-01 04:00:00', '2020-01-01 02:00:00', '2020-01-01 06:00:00', '2020-01-01 04:00:00', '2020-01-01 08:00:00', '2020-01-01 06:00:00'])
 
     def test_extract_time_info_from_datetime(self):
         serie = pd.to_datetime(pd.Series('2020-01-01'))
