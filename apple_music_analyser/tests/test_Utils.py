@@ -1,8 +1,7 @@
 import pandas as pd
 import unittest
 
-#from apple_music_analyser.Utility import Utility
-from Utility import Utility
+from apple_music_analyser.Utility import Utility
 
 class TestUtils(unittest.TestCase):
 
