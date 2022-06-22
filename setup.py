@@ -19,7 +19,7 @@ setup(
         "Topic :: Scientific/Engineering :: Visualization"
     ],
     packages=['apple_music_analyser', 'apple_music_analyser.tests'],
-    install_requires=["numpy==1.18.4", "pandas==1.0.4", "plotly==4.8.1"],
+    install_requires=["numpy==1.22.0", "pandas==1.0.4", "plotly==4.8.1"],
     include_package_data=True,
     python_requires='>=3.6',
     test_suite='tests',
